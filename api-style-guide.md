@@ -1,0 +1,1 @@
+git@github.com:paypal/api-standards.git
