@@ -39,7 +39,7 @@ This is intended to augment the more comprehensive API Standards. If any conflic
 
 The URI should include `/vN` with the major version (`N`) as a prefix. 
 
-URL-based versioning is utilized for it's simplicity of use for API consumers, versus the more complex header-based approach.
+URL-based versioning is utilized for its simplicity of use for API consumers, versus the more complex header-based approach.
 
 #### URI Template
 	/v{version}/
@@ -102,7 +102,7 @@ Hypermedia links are high value in navigating paged resource collections, as `pa
 Links should be provided with rels of `next`, `previous`, `first`, `last` wherever appropriate.
 
 ##### Time selection
-`start_time` or `{property_name}_after`, `end_time` or `{property_name}_before` query parameters shoudl be provided if time selection is needed
+`start_time` or `{property_name}_after`, `end_time` or `{property_name}_before` query parameters should be provided if time selection is needed
 
 ##### Sorting
 `sort_by` and `sort_order` can be provided to allow for collection results to be sorted. `sort_by` should be a field in the individual resources, and `sort_order` should be `asc` or `desc`.
@@ -321,7 +321,7 @@ POST /v1/vault/credit-cards
 
 When an API consumer defines the resource identifier, the PUT verb should be utilized, as the operation is idempotent, even during creation.
 
-The same interaction as [Create New Resource](#create-new-resource) is used here. 201 + response body on resource creattion, and 204 + no response body when an existing resource is updated.
+The same interaction as [Create New Resource](#create-new-resource) is used here. 201 + response body on resource creation, and 204 + no response body when an existing resource is updated.
 
 ## Sub-Resource Collection
 
@@ -356,7 +356,7 @@ This approach is usually used as a means to reduce the size of a resource, when 
 
 When a sub-resource is a one-to-one relationship with the parent resource, the name should be a singluar noun. As often as possible, that single resource should always be present (i.e. does not respond with 404).
 
-The sub-resource should be owned by the parent resource; otherwise this sub-resource should probably be promoted to it's own resource collection, and relationships represented with sub-resource collections in the other direction. Sub-resource singletons should not duplicate a resource from another collection.
+The sub-resource should be owned by the parent resource; otherwise this sub-resource should probably be promoted to its own resource collection, and relationships represented with sub-resource collections in the other direction. Sub-resource singletons should not duplicate a resource from another collection.
 
 If the singleton sub-resource needs to be created, PUT should be used, as the operation is idempotent, on creation or update. PATCH can be used for partial updates, but should not be available on creation (in part because it is not idempotent).
 
