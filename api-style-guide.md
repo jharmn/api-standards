@@ -96,7 +96,7 @@ Pages of results should be referred to consistently by the query parameters `pag
 
 Additionally, responses should include `total_items` and `total_pages` whenever possible, where `total_items` indicates the total items in the requested collection, and `total_pages` is the number of pages (iterpolated from `total_items`/`page_size`).
 
-###### Hypermedia links
+##### Hypermedia links
 Hypermedia links are high value in navigating paged resource collections, as `page`/`page_size` query parameters can be maintained while navigating pages of results.
 
 Links should be provided with rels of `next`, `previous`, `first`, `last` wherever appropriate.
@@ -111,7 +111,7 @@ Links should be provided with rels of `next`, `previous`, `first`, `last` wherev
 	GET /{version}/{namespace}/{resource}
 #### Example Request
 	GET /v1/vault/credit-cards
-#### Example Resopnse
+#### Example Response
 ~~~
 {
     "total_items": 1,
