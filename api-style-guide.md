@@ -83,9 +83,9 @@ Collection resource names should be plural nouns, e.g. `/users`. This helps visu
 
 A list of all of the given resources, including any related metadata. Array of resources should be in the `items` field. Fields like `total_items` and `total_pages` help provide context to paged results. Consistent naming of collection resource fields allow API clients to create generic handling for using the provided data across various resource collections.
 
-The GET verb should not effect the system, and should not change response on subsequent requests (unless the underlying data changes), i.e. it should be idempotent. Exceptions to 'changing the system' are typically instrumentation/logging-related.
+The GET verb should not affect the system, and should not change response on subsequent requests (unless the underlying data changes) -- i.e. it should be idempotent. Exceptions to 'changing the system' are typically instrumentation/logging-related.
 
-The list of data is presumed to be filtered based on the provided security context of the API client, this should not be a list of all resources in the domain.
+The list of data is presumed to be filtered based on the provided security context of the API client; this should not be a list of all resources in the domain.
 
 Providing a summarized, or minimized version of the data representation can
 reduce the bandwidth footprint, in cases where individual resources contain a large object.
@@ -94,10 +94,10 @@ reduce the bandwidth footprint, in cases where individual resources contain a la
 ##### Paging
 Pages of results should be referred to consistently by the query parameters `page` and `page_size`, where `page_size` refers to the amount of results per request, and `page` refers to the requested page.
 
-Additionally, responses should include `total_items` and `total_pages` whenever possible, where `total_items` indicates the total items in the requested collection, and `total_pages` is the number of pages (iterpolated from `total_items`/`page_size`).
+Additionally, responses should include `total_items` and `total_pages` whenever possible, where `total_items` indicates the total items in the requested collection, and `total_pages` is the number of pages (interpolated from `total_items`/`page_size`).
 
 ###### Hypermedia links
-Hypermedia links are high value in navigating paged resource collections, as `page`/`page_size` query parameters can be maintained while navigating pages of results.
+Hypermedia links are of high value in navigating paged resource collections, as `page`/`page_size` query parameters can be maintained while navigating pages of results.
 
 Links should be provided with rels of `next`, `previous`, `first`, `last` wherever appropriate.
 
@@ -167,10 +167,9 @@ If the collection is empty (0 items in response), `404 Not Found` is not appropr
 ### Read Single Resource
 A single resource, typically derived from the parent collection of resources (often more detailed than the collection resource items).
 
-Executing GET should never affect the system, and should not change response on subsequent
-requests, i.e. it should be idempotent.
+Executing GET should never affect the system, and should not change response on subsequent requests -- i.e. it should be idempotent.
 
-All identifiers for sensitive data should be non-sequential, and preferrably non-numeric. In scenarios where this data might be used as a subordinate to other data, immutable string identifiers should be utilized for easier readability and debugging (i.e. "NAME_OF_VALUE" vs 1421321).
+All identifiers for sensitive data should be non-sequential, and preferrably non-numeric. In scenarios where this data might be used as a subordinate to other data, immutable string identifiers should be utilized for easier readability and debugging (e.g. "NAME_OF_VALUE" vs. 1421321).
 
 #### URI Template
 	GET /{version}/{namespace}/{resource}/{resource-id}
@@ -194,7 +193,7 @@ If the provided resource identifier is not found, responds `404 Not Found` HTTP 
 ### Update Single Resource
 
 Updates a single resource. The shape of the PUT request should maintain parity with the GET response for the selected resource. Fields in the request body can be
-optional or ignored during deserialization, such as "create_time" or other system-calculated values.
+optional or ignored during deserialization, such as `create_time` or other system-calculated values.
 
 #### URI Template
 	PUT /{version}/{namespace}/{resource}/{resource-id}
@@ -213,12 +212,12 @@ optional or ignored during deserialization, such as "create_time" or other syste
 
 Any failed request validation responds `400 Bad Request` HTTP status. If clients attempt to modify read-only fields, this is also a `400 Bad Request`.
 
-If there are business rules (more than data type/length/etc), it is best to provide a specific
-error code & message (in addition to the `400`) for that validation.
+If there are business rules (more than data type, length, etc.), it is best to provide a specific
+error code and message (in addition to the `400`) for that validation.
 
 For situations which require interaction with APIs or processes outside of the current request, the `422` status code is appropriate. For more practical examples, see the [PPaaS Blog on this topic](http://ppaas/news/2014/05/01/added-standards-for-422-http-status/)
 
-After successful update, PUT operations should respond with `204 No Content` status, with no response body.
+After successful update, PUT operations should respond `204 No Content` HTTP status with no response body.
 
 
 ### Update Partial Single Resoure
@@ -226,7 +225,7 @@ Updates a part of a single resource. Unlike PUT, which requires parity with GET,
 
 [JSON Patch](https://tools.ietf.org/html/rfc6902) is a message format used to execute ordered operations, used for all PATCH operations at PayPal.
 
-Unless it optimizes client flow in calling other APIs, or system generated values could be commonly changed by an update, response should be `204 No Content` and no response body. Because PATCH is often called frequently in interactive form UX design, returning the entire response could be irresponsible from a bandwidth perspective, especially in mobile scenarios.
+Unless it optimizes client flow in calling other APIs, or system-generated values could be commonly changed by an update, the response should be `204 No Content` and no response body. Because PATCH is often called frequently in interactive form UX design, returning the entire response could be irresponsible from a bandwidth perspective, especially in mobile scenarios.
 
 #### URI Template
 	PATCH /{version}/{namespace}/{resource}/{resource-id}
@@ -255,9 +254,9 @@ Deletes a single resource. In order to enable retries (typically patchy connecti
 
 ### Create New Resource
 
-Creates a new resource in the collection. Request body may be somewhat different than GET/PUT response/request (typically fewer fields as the server will generate some values).
+Creates a new resource in the collection. The request body may be somewhat different than GET/PUT response/request (typically containing fewer fields as the server will generate some values).
 
-In most cases, the API server produces an identifier for the resource. In cases where identifier is supplied by the API consumer, use [Create New Resource - Consumer ID]()
+In most cases, the API server produces an identifier for the resource. In cases where identifier is supplied by the API consumer, use [Create New Resource - Consumer ID](#create-new-resource---consumer-supplied-identifier).
 
 Once the POST has successfully completed, a new resource will be created. The identifier for this resource should be added to the resource collection URI.
 
@@ -321,7 +320,7 @@ POST /v1/vault/credit-cards
 
 When an API consumer defines the resource identifier, the PUT verb should be utilized, as the operation is idempotent, even during creation.
 
-The same interaction as [Create New Resource](#create-new-resource) is used here. 201 + response body on resource creation, and 204 + no response body when an existing resource is updated.
+The same interaction as [Create New Resource](#create-new-resource) is used here. `201` + response body on resource creation, and `204` + no response body when an existing resource is updated.
 
 ## Sub-Resource Collection
 
@@ -331,11 +330,11 @@ Sometimes, multiple identifiers are required ('composite keys', in the database 
 * The need to maintain multiple identifiers can create a burden on client developers.
   * Look for opportunities to promote resources with unique identifiers (i.e. there is no need to identify the parent resource) to a first-level resource.
 * Caution should be used in identifying the name of the sub-resource, as to not interfere with the identifier naming conventions of the base resource. In other words, `/{version}/{namespace}/{resource}/{resource-id}/{sub-resource-id}` is not appropriate, as the `sub-resource-id` has ambiguous meaning.
-* Two levels is a practical limit for resource identifiers
+* Two levels is a practical limit for resource identifiers. As the number of levels increases:
   * API client usability suffers, as the need for clients to maintain state about identifier hierarchy increases complexity.
   * Server developers must validate each level of identifiers in order to verify that they are allowed access, and that they relate to each other, thus increasing risk and complexity.
 
-Note these templates/examples are brief: for more detail on the Resource Collection style, [see above](crud/collection-resources). Although this section explains the sub-resource collection, all interactions should be the same, simply with the addition of a parent identifier.
+Note that these templates/examples are brief: for more detail on the Resource Collection style, [see above](crud/collection-resources). Although this section explains the sub-resource collection, all interactions should be the same, simply with the addition of a parent identifier.
 
 #### URI Templates
 	POST /{version}/{namespace}/{resource}/{resource-id}/{sub-resource}
@@ -354,9 +353,9 @@ Note these templates/examples are brief: for more detail on the Resource Collect
 ## Sub-Resource Singleton
 This approach is usually used as a means to reduce the size of a resource, when use cases support the segmentation of a large resource into smaller resources. In scenarios where a resource has a one-to-one relationship to a single resource, representing that relationship will look different than a collection. 
 
-When a sub-resource is a one-to-one relationship with the parent resource, the name should be a singluar noun. As often as possible, that single resource should always be present (i.e. does not respond with 404).
+When a sub-resource is a one-to-one relationship with the parent resource, the name should be a singluar noun. As often as possible, that single resource should always be present (i.e. does not respond with `404`).
 
-The sub-resource should be owned by the parent resource; otherwise this sub-resource should probably be promoted to its own resource collection, and relationships represented with sub-resource collections in the other direction. Sub-resource singletons should not duplicate a resource from another collection.
+The sub-resource should be owned by the parent resource; otherwise, this sub-resource should probably be promoted _up_ to its own resource collection, and relationships represented with sub-resource collections in the other direction. Sub-resource singletons should not duplicate a resource from another collection.
 
 If the singleton sub-resource needs to be created, PUT should be used, as the operation is idempotent, on creation or update. PATCH can be used for partial updates, but should not be available on creation (in part because it is not idempotent).
 
@@ -374,7 +373,7 @@ This should not be used as a mechanism to update single or subsets of fields wit
 ~~~
 POST /{namespace}/{action-resource}
 ~~~
-*NOTE: Use with caution*
+*NOTE: Use with caution.*
 
 Also known as 'controller', or 'actions', this should be used with extreme prudence, only when [Resource Collection](#resource-collection) designs have been deliberately considered and disqualified. For further reading on 'controller' concepts, please refer to [section 2.6 of the RESTful Web Services Cookbook](http://www.amazon.com/RESTful-Web-Services-Cookbook-Scalability/dp/0596801688).
 
@@ -388,15 +387,19 @@ In most cases, actions are taken on resources, and complex operations should be 
 When a use case is uniquely focused on actions, and not on resources, POST should always be used, and a singular verb should indicate the action to be performed. This helps to visually distinguish actions from [Collection Resources](#collection-resource).
 
 ### Risks
-* Design scalability
+* Design Scalability:
 	* When overused, the number of URIs can grow very quickly, as all permutations of root-level action can increase rapidly over time. This can also produce configuration complexity for routing/externalization.
 	* The URI cannot be extended past the action, which precludes any possibility of sub-resources.
-* Testability: highly compromised in comparison to [Resource Collection](#resource-collection)-oriented designs (due the lack of corresponding GET/read operations).
-* History: the ability to retrieve history for the given actions is forced to live in another resource (e.g. `/action-resource-history`), or not at all.
+* Testability:
+	* Highly compromised in comparison to [Resource Collection](#resource-collection)-oriented designs (due the lack of corresponding GET/read operations).
+* History:
+	* The ability to retrieve history for the given actions is forced to live in another resource (e.g. `/action-resource-history`), or not at all.
 
 ### Benefits
-* Avoids corrupting resource collection model with transient data (e.g. comments on state changes etc).
-* Usability improvement: there are cases where a complex operation simplifies client interaction, where the client does not benefit from resource retrieval.
+* Preserves Purity:
+	* Avoids corrupting resource collection model with transient data (e.g. comments on state changes etc.).
+* Improves Usability:
+	* There are cases where a complex operation simplifies client interaction, where the client does not benefit from resource retrieval.
 
 
 ### Resource-Oriented Alternative
@@ -431,9 +434,9 @@ POST /v1/risk/payment-decisions
 
 ### Complex Operation - Sub-Resource
 
-*NOTE: Use with caution*
+*NOTE: Use with caution.*
 
-*For associated risks, see [Complex Operation](#complex-operation) above*
+*For associated risks, see [Complex Operation](#complex-operation) above.*
 
 There are often situations in which a canonical resource needs to impart
 certain actions or state changes which are not appropriate in a PUT or PATCH. These
@@ -484,13 +487,13 @@ PATCH /v1/payments/billing-agreements/I-0LN988D3JACS
 ]
 ~~~
 
-Keep in mind if there is any need to see the history of these actions, a [Sub-resource Collection](#sub-resource-collection) is appropriate to show all of the prior executions of this action. In that case, the verb should be '[reified](http://en.wikipedia.org/wiki/Reification_(computer_science)'), or changed to a plural noun (e.g. 'execute' would become 'executions').
+Keep in mind that if there is any need to see the history of these actions, a [Sub-resource Collection](#sub-resource-collection) is appropriate to show all of the prior executions of this action. In that case, the verb should be '[reified](http://en.wikipedia.org/wiki/Reification_(computer_science))', or changed to a plural noun (e.g. 'execute' would become 'executions').
 
 ### Complex Operation - Composite
 
 This type of complex operation creates/updates/deletes multiple resources in one operation. This serves as both a performance & usability optimization, as well as adding better atomicity when values in the request might affect multiple resources at the same time. 
 
-Note in the sample below, the capture and the payment are both potentially affected by refund. A PUT or PATCH operation on the capture resource would have unintended side effects on the payment resource. To encapsulate both of these changes, the 'refund' action is used.
+Note that, in the sample below, the capture and the payment are both potentially affected by refund. A PUT or PATCH operation on the capture resource would have unintended side effects on the payment resource. To encapsulate both of these changes, the 'refund' action is used.
 
 #### URI Template
     POST /{version}/{namespace}/{action}
@@ -598,7 +601,7 @@ This allows for hypermedia links to provide `next`, `previous`, `first`, `last` 
 	}
 
 ## Read-only resources
-In situations where highly cacheable data is utilized to calculate values, or provide static reference, GET can be utilized instead of POST, as POST is not cacheable in HTTP. As POST is not cacheable, GET may be more appropriate.
+In situations where highly-cacheable data is utilized to calculate values, or provide static reference, GET may be utilized instead of POST, as POST is not cacheable in HTTP.
 
 GET operations should be idempotent, and should not be used to change resource state. POST should be used with [Complex Operations](#complex-operation).
 
