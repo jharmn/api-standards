@@ -11,7 +11,7 @@
       - [Sorting](#sorting)
   - [Read Single Resource](#read-single-resource)
   - [Update Single Resource](#update-single-resource)
-  - [Update Partial Single Resoure](#update-partial-single-resoure)
+  - [Update Partial Single Resource](#update-partial-single-resource)
   - [Delete Single Resource](#delete-single-resource)
   - [Create New Resource](#create-new-resource)
   - [Create New Resource - Consumer Supplied Identifier](#create-new-resource---consumer-supplied-identifier)
@@ -221,7 +221,7 @@ For situations which require interaction with APIs or processes outside of the c
 After successful update, PUT operations should respond with `204 No Content` status, with no response body.
 
 
-### Update Partial Single Resoure
+### Update Partial Single Resource
 Updates a part of a single resource. Unlike PUT, which requires parity with GET, PATCH merely changes the fields provided, and leaves the rest of the resource unaffected. 
 
 [JSON Patch](https://tools.ietf.org/html/rfc6902) is a message format used to execute ordered operations, used for all PATCH operations at PayPal.
