@@ -111,7 +111,7 @@ Links should be provided with rels of `next`, `previous`, `first`, `last` wherev
 	GET /{version}/{namespace}/{resource}
 #### Example Request
 	GET /v1/vault/credit-cards
-#### Example Resopnse
+#### Example Response
 ~~~
 {
     "total_items": 1,
@@ -221,7 +221,7 @@ For situations which require interaction with APIs or processes outside of the c
 After successful update, PUT operations should respond with `204 No Content` status, with no response body.
 
 
-### Update Partial Single Resoure
+### Update Partial Single Resource
 Updates a part of a single resource. Unlike PUT, which requires parity with GET, PATCH merely changes the fields provided, and leaves the rest of the resource unaffected. 
 
 [JSON Patch](https://tools.ietf.org/html/rfc6902) is a message format used to execute ordered operations, used for all PATCH operations at PayPal.
@@ -354,7 +354,7 @@ Note these templates/examples are brief: for more detail on the Resource Collect
 ## Sub-Resource Singleton
 This approach is usually used as a means to reduce the size of a resource, when use cases support the segmentation of a large resource into smaller resources. In scenarios where a resource has a one-to-one relationship to a single resource, representing that relationship will look different than a collection. 
 
-When a sub-resource is a one-to-one relationship with the parent resource, the name should be a singluar noun. As often as possible, that single resource should always be present (i.e. does not respond with 404).
+When a sub-resource is a one-to-one relationship with the parent resource, the name should be a singular noun. As often as possible, that single resource should always be present (i.e. does not respond with 404).
 
 The sub-resource should be owned by the parent resource; otherwise this sub-resource should probably be promoted to its own resource collection, and relationships represented with sub-resource collections in the other direction. Sub-resource singletons should not duplicate a resource from another collection.
 
