@@ -221,7 +221,7 @@ For situations which require interaction with APIs or processes outside of the c
 After successful update, PUT operations should respond with `204 No Content` status, with no response body.
 
 
-### Update Partial Single Resoure
+### Update Partial Single Resource
 Updates a part of a single resource. Unlike PUT, which requires parity with GET, PATCH merely changes the fields provided, and leaves the rest of the resource unaffected. 
 
 [JSON Patch](https://tools.ietf.org/html/rfc6902) is a message format used to execute ordered operations, used for all PATCH operations at PayPal.
