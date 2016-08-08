@@ -170,7 +170,7 @@ A single resource, typically derived from the parent collection of resources (of
 Executing GET should never affect the system, and should not change response on subsequent
 requests, i.e. it should be idempotent.
 
-All identifiers for sensitive data should be non-sequential, and preferrably non-numeric. In scenarios where this data might be used as a subordinate to other data, immutable string identifiers should be utilized for easier readability and debugging (i.e. "NAME_OF_VALUE" vs 1421321).
+All identifiers for sensitive data should be non-sequential, and preferably non-numeric. In scenarios where this data might be used as a subordinate to other data, immutable string identifiers should be utilized for easier readability and debugging (i.e. "NAME_OF_VALUE" vs 1421321).
 
 #### URI Template
 	GET /{version}/{namespace}/{resource}/{resource-id}
@@ -354,13 +354,13 @@ Note these templates/examples are brief: for more detail on the Resource Collect
 ## Sub-Resource Singleton
 This approach is usually used as a means to reduce the size of a resource, when use cases support the segmentation of a large resource into smaller resources. In scenarios where a resource has a one-to-one relationship to a single resource, representing that relationship will look different than a collection. 
 
-When a sub-resource is a one-to-one relationship with the parent resource, the name should be a singluar noun. As often as possible, that single resource should always be present (i.e. does not respond with 404).
+When a sub-resource is a one-to-one relationship with the parent resource, the name should be a singular noun. As often as possible, that single resource should always be present (i.e. does not respond with 404).
 
 The sub-resource should be owned by the parent resource; otherwise this sub-resource should probably be promoted to its own resource collection, and relationships represented with sub-resource collections in the other direction. Sub-resource singletons should not duplicate a resource from another collection.
 
 If the singleton sub-resource needs to be created, PUT should be used, as the operation is idempotent, on creation or update. PATCH can be used for partial updates, but should not be available on creation (in part because it is not idempotent).
 
-This should not be used as a mechanism to update single or subsets of fields with PUT. The resource should remain intact, and PATCH should be utilized for partial update. Creating sub-resource singletons for each use case of updates is not a scaleable design approach, as many endpoints could result long-term.
+This should not be used as a mechanism to update single or subsets of fields with PUT. The resource should remain intact, and PATCH should be utilized for partial update. Creating sub-resource singletons for each use case of updates is not a scalable design approach, as many endpoints could result long-term.
 
 #### URI Template
 	GET/PUT /{version}/{namespace}/{resource}/{resource-id}/{sub-resource}
