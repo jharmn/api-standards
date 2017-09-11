@@ -11,7 +11,7 @@
       - [Sorting](#sorting)
   - [Read Single Resource](#read-single-resource)
   - [Update Single Resource](#update-single-resource)
-  - [Update Partial Single Resoure](#update-partial-single-resoure)
+  - [Update Partial Single Resource](#update-partial-single-resource)
   - [Delete Single Resource](#delete-single-resource)
   - [Create New Resource](#create-new-resource)
   - [Create New Resource - Consumer Supplied Identifier](#create-new-resource---consumer-supplied-identifier)
@@ -58,7 +58,7 @@ In any URI, the first noun (which may be singular or plural, depending on the si
 	/v1/vault/
 
 ### Resource References
-The URI references for resources should consistenly use the same path components to refer to resources. Sub-namespace or sub-folders should be avoided, to maintain path consistency. This allows consumer developers to have a predictable experience in case they are building URIs in code.
+The URI references for resources should consistently use the same path components to refer to resources. Sub-namespace or sub-folders should be avoided, to maintain path consistency. This allows consumer developers to have a predictable experience in case they are building URIs in code.
 
 #### URI Template
 	/{version}/{namespace}/{resource}/{resource-id}/{sub-resource}/{sub-resource-id}
@@ -111,7 +111,7 @@ Links should be provided with rels of `next`, `previous`, `first`, `last` wherev
 	GET /{version}/{namespace}/{resource}
 #### Example Request
 	GET /v1/vault/credit-cards
-#### Example Resopnse
+#### Example Response
 ~~~
 {
     "total_items": 1,
@@ -220,7 +220,7 @@ For situations which require interaction with APIs or processes outside of the c
 After successful update, PUT operations should respond `204 No Content` HTTP status with no response body.
 
 
-### Update Partial Single Resoure
+### Update Partial Single Resource
 Updates a part of a single resource. Unlike PUT, which requires parity with GET, PATCH merely changes the fields provided, and leaves the rest of the resource unaffected. 
 
 [JSON Patch](https://tools.ietf.org/html/rfc6902) is a message format used to execute ordered operations, used for all PATCH operations at PayPal.
@@ -353,13 +353,13 @@ Note that these templates/examples are brief: for more detail on the Resource Co
 ## Sub-Resource Singleton
 This approach is usually used as a means to reduce the size of a resource, when use cases support the segmentation of a large resource into smaller resources. In scenarios where a resource has a one-to-one relationship to a single resource, representing that relationship will look different than a collection. 
 
-When a sub-resource is a one-to-one relationship with the parent resource, the name should be a singluar noun. As often as possible, that single resource should always be present (i.e. does not respond with `404`).
+When a sub-resource is a one-to-one relationship with the parent resource, the name should be a singular noun. As often as possible, that single resource should always be present (i.e. does not respond with 404).
 
 The sub-resource should be owned by the parent resource; otherwise, this sub-resource should probably be promoted _up_ to its own resource collection, and relationships represented with sub-resource collections in the other direction. Sub-resource singletons should not duplicate a resource from another collection.
 
 If the singleton sub-resource needs to be created, PUT should be used, as the operation is idempotent, on creation or update. PATCH can be used for partial updates, but should not be available on creation (in part because it is not idempotent).
 
-This should not be used as a mechanism to update single or subsets of fields with PUT. The resource should remain intact, and PATCH should be utilized for partial update. Creating sub-resource singletons for each use case of updates is not a scaleable design approach, as many endpoints could result long-term.
+This should not be used as a mechanism to update single or subsets of fields with PUT. The resource should remain intact, and PATCH should be utilized for partial update. Creating sub-resource singletons for each use case of updates is not a scalable design approach, as many endpoints could result long-term.
 
 #### URI Template
 	GET/PUT /{version}/{namespace}/{resource}/{resource-id}/{sub-resource}
