@@ -1,7 +1,7 @@
 # Common Types
 
 
-Please refer to [documentation](../../../docs/common-json-types.md#common) to find more details about Common Types. For more details on the address type refer to [README](README_address.md) dedicated to the type.
+Please refer to [documentation](../../../api-style-guide.md#common-types) to find more details about Common Types. For more details on the address type refer to [README](README_address.md) dedicated to the type.
 
 
 #### Extend Common Type (if needed)
