@@ -4,7 +4,7 @@
 
 This document lists various useful patterns for API design. We encourage API developers to consider the following patterns as a guide while designing APIs for services.
 
-###Document Semantics, Formatting, and Naming
+### Document Semantics, Formatting, and Naming
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
 
@@ -46,7 +46,7 @@ HTTP headers are written in camelCase + hyphenated syntax, e.g. Foo-Request-Id.
     * [Complex Operation - Composite](#complex-operation-composite) 
     * [Complex Operation - Transient](#complex-operation-transient) 
     * [Complex Operation - Search](#complex-operation-search) 
-* [Resource-Oriented Alternative] (#controller-alternative)
+* [Resource-Oriented Alternative](#controller-alternative)
 * [File Upload](#file-uploads)
 	* [Standalone Operation](#fileuploads-two-step)
 	* [As Attachment](#fileuploads-one-step)

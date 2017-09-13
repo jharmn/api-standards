@@ -9,7 +9,7 @@ PayPal APIs follow the [RESTful][0] architectural style as much as possible. To 
 
 We are sharing these guidelines to help propagate good API design practices in general. We have pulled extensively from the broader community and believe that it is important to give back. The documentation is as generic as possible to make it easier to incorporate into the guidelines you use in your projects. If you have any updates, suggestions, or additions that you would like to contribute, please feel free to submit a PR or create an issue.
 
-###Document Semantics, Formatting, and Naming
+### Document Semantics, Formatting, and Naming
 
 The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
 
@@ -442,7 +442,7 @@ All REST APIs MUST use only the following status codes. Status codes in **`BOLD`
 For each HTTP method, API developers SHOULD use only status codes marked as "X"  in this table. If an API needs to return any of the status codes marked with an **`X`**, then the use case SHOULD be reviewed as part of API design review process and maturity level assessment. Most of these status codes are used to support very rare use cases.
 
 | Status Code | 200 Success | 201 Created |202 Accepted | 204 No Content | 400 Bad Request |  404 Not Found |422 Unprocessable Entity | 500 Internal Server Error |
-|-------------|:--------------|:--------------|:--------------|:--------------|:-----------------|:------------------|:----------------|:----------------|:----------------------------|
+|-------------|:------------|:------------|:------------|:---------------|:----------------|:---------------|:------------------------|:--------------------------|
 | `GET`       | X         |               |               |                  | X             | X              | **`X`**           | X                       |
 | `POST`      | X         | X         | **`X`**           |                 |  X             | **`X`**              | **`X`**               | X                       |
 | `PUT`       | X             |               | **`X`**           | X           | X             | X              | **`X`**           | X                       |
