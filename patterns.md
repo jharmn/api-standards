@@ -1592,7 +1592,7 @@ Designers of new services SHOULD refer to the [_RESTful Web Services Cookbook_][
 
 
 [1]: http://www.odata.org/documentation/odata-version-3-0/batch-processing/ "OData Batch Specification"
-[2]: ../v1/schema/json/draft-04/error.json "error.json"
+[2]: v1/schema/json/draft-04/error.json "error.json"
 [3]: https://tools.ietf.org/html/rfc6901 "JSON Pointer"
 [4]: http://techbus.safaribooksonline.com/book/web-development/web-services/9780596809140 "RESTful Web Services Cookbook"
 [5]: https://www.w3.org/TR/NOTE-datetime "ISO 8601 Date and Time Formats"
