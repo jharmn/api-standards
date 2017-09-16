@@ -1452,7 +1452,7 @@ Please refer to [README for Address][12] for more details about the address type
 
 <h3 id="money">Money</h3>
 
-Money is a standard type to represent amounts. The Common Type [`money.json`][5] provides common definition of money.
+Money is a standard type to represent amounts. The Common Type [`money.json`][15] provides common definition of money.
 
 **Data-type integrity rules:**
 
