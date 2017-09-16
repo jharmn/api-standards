@@ -1,4 +1,4 @@
-
+/
 # API Design Patterns And Use Cases
 
 
@@ -687,7 +687,7 @@ _**For the very first request from the client**:_
 The API client sends a new `POST` request with the `Foo-Request-Id` header that contains the `idempotency key`.
 
 ```
-POST v1/payments/referenced-payouts-items HTTP/1.1
+POST /v1/payments/referenced-payouts-items HTTP/1.1
 Host: api.foo.com
 Content-Type: application/json
 Authorization: Bearer oauth2_token
@@ -731,7 +731,7 @@ _**For subsequent requests from the client with same input payload**:_
 The API client sends a `POST` request with the same `idempotency key` and input body as before.
 
 ```
-POST v1/payments/referenced-payouts-items HTTP/1.1
+POST /v1/payments/referenced-payouts-items HTTP/1.1
 Host: api.foo.com
 Content-Type: application/json
 Authorization: Bearer oauth2_token

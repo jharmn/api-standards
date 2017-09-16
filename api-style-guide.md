@@ -101,7 +101,7 @@ HTTP headers are written in camelCase + hyphenated syntax, e.g. Foo-Request-Id.
     * [API Versioning Policy](#api-versioning-policy)
     * [Backwards Compatibility](#backwards-compatibility)
     * [End of Life Policy](#eol-policy)
-* [Deprecation](#deprecated)
+* [Deprecation](#deprecation)
     * [Terms Used](#deprecation-terms-used)
     * [Background](#deprecation-background)
     * [Requirements](#deprecation-requirements)
