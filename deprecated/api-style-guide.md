@@ -215,7 +215,7 @@ Any failed request validation responds `400 Bad Request` HTTP status. If clients
 If there are business rules (more than data type, length, etc.), it is best to provide a specific
 error code and message (in addition to the `400`) for that validation.
 
-For situations which require interaction with APIs or processes outside of the current request, the `422` status code is appropriate. For more practical examples, see the [PPaaS Blog on this topic](http://ppaas/news/2014/05/01/added-standards-for-422-http-status/)
+For situations which require interaction with APIs or processes outside of the current request, the `422` status code is appropriate.
 
 After successful update, PUT operations should respond `204 No Content` HTTP status with no response body.
 
@@ -237,6 +237,7 @@ Unless it optimizes client flow in calling other APIs, or system-generated value
         "path": "/url",
         "value": "https://www.yeowza.com/paypal_webhook_new_url"
     }
+        ]
 #### Example Response
 	204 No Content
     
