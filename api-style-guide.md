@@ -1008,7 +1008,7 @@ Query parameters are name/value pairs specified after the resource path, as pres
 
 * Query parameters SHOULD be used only for the purpose of restricting the resource collection or as search or filtering criteria.
 * The resource identifier in a collection SHOULD NOT be used to filter collection results, resource identifier should be in the URI.
-* Parameters for pagination SHOULD follow [pagination](#pagination) guidelines.
+* Parameters for pagination SHOULD follow [pagination](patterns.md#pagination) guidelines.
 * Default sort order SHOULD be considered as undefined and non-deterministic. If a explicit sort order is desired, the query parameter `sort` SHOULD be used with the following general syntax: `{field_name}|{asc|desc},{field_name}|{asc|desc}`. For instance: `/accounts?sort=date_of_birth|asc,zip_code|desc`
 
 #### Query parameters on a single resource
