@@ -781,7 +781,7 @@ Below is an example response that is compliant with the above schema.
 
 A `Link Relation Type` serves as an identifier for a link. An API MUST assign a meaningful link relation type that unambiguously describes the semantics of the link. Clients use the relevant Link Relation Type in order to identify the link to use from a representation.
 
-When the semantics of a Link Relation Type defined in *[IANA's list of standardized link relations] [5]* matches with the one you want to define, then it MUST be used. The table below describes some of the commonly used link relation types. It also lists some additional lin relation types defined by these guidelines.
+When the semantics of a Link Relation Type defined in *[IANA's list of standardized link relations] [5]* matches with the one you want to define, then it MUST be used. The table below describes some of the commonly used link relation types. It also lists some additional link relation types defined by these guidelines.
 
 |Link Relation Type | Description|
 |---------|------------|
